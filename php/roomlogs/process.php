@@ -9,7 +9,7 @@ $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+session_start();
 // Function to retrieve rooms based on availability
 function getRooms($conn, $availability) {
     $sql = "SELECT RoomID, RoomType, Capacity, NumofTen, RoomStatus FROM rooms";
