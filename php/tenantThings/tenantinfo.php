@@ -1,6 +1,7 @@
 <?php
 include '../mysql.php';
 // Check if TenantID is set
+session_start();
 if (isset($_GET['TenantID'])) {
     $TenantID = $_GET['TenantID'];
 } else {
@@ -245,9 +246,12 @@ $result->close();
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <div class="text-right">
-                                    <input type="submit" id="submit" name="action" class="btn btn-primary" value="Update Profile" onclick="return confirm(\'Are you sure you want to update this tenant?\')">
-                                </div>
+                                <div class="text-right">';
+// check here for session errors
+                                IF ($_SESSION['staff_role'] == 'Admin' || $_SESSION['staff_role'] == 'admin'){ 
+                                echo'    <input type="submit" id="submit" name="action" class="btn btn-primary" value="Update Profile" onclick="return confirm(\'Are you sure you want to update this tenant?\')">';
+                                        }
+                               echo ' </div>
                             </div>
                         </div>
                         </form>
@@ -302,9 +306,13 @@ $result->close();
                                                     <input type="hidden" name="TenantID" value="' . $row["TenantID"] . '">
                                                     <input type="hidden" name="OccupancyID" value="' . $row["OccupancyID"] . '">
                                                     <input type="hidden" name="AppID" value="' . $row["TenantAppID"] . '">
-                                                    <td><input type="number" name="Quantity" value='. $row["Quantity"] . '><input type="submit" onclick="return confirm(\'Are you sure you want to deactivate this tenant?\')"></td>
-                                                </form>
-                                                <form action="../roomDetailsThings/updateTenantDetails.php" method="post">
+                                                    <td><input type="number" name="Quantity" value='. $row["Quantity"] . '>';
+                        // check here for session errors
+if ($_SESSION['staff_role'] == 'Admin' || $_SESSION['staff_role'] == 'admin') {
+                        echo '<input type="submit" onclick="return confirm(\'Are you sure you want to deactivate this tenant?\')"></td>
+                                                </form>';
+}
+                                               echo' <form action="../roomDetailsThings/updateTenantDetails.php" method="post">
                                                     <input type="hidden" name="OccupancyID" value="' . $row["OccupancyID"] . '">
                                                     <input type="hidden" name="RoomID" value="' . $row["RoomID"] . '">
                                                     <td>
