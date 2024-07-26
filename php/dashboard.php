@@ -370,6 +370,7 @@
                 <div class="card">
 
                     <?php
+                    session_start();
                     include 'mysql.php';
 
                     // PHP code to fetch the total number of vacant rooms
