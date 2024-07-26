@@ -36,9 +36,11 @@
                 <p>View list of available rooms and active tenants!</p>
 
                 <div class="header-buttons">
-                    <div class="buttons">
-                        <button id="addRoomBtn" class="btn">Add Room</button>
-
+                    <div class="buttons"> <?php
+if ($_SESSION['staff_role'] == 'Admin' || $_SESSION['staff_role'] == 'admin') {
+    echo '<button id="addRoomBtn" class="btn">Add Room</button>';
+}
+?>
                         <div id="addRoomModal" class="modal">
                             <div class="modal-content">
                                 <span class="close">&times;</span>
