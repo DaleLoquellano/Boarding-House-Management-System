@@ -177,10 +177,10 @@ function getRoomInfo($conn, $roomId) {
         echo "<p>Capacity: " . htmlspecialchars($room['Capacity']) . "</p>";
         echo "<p>Number of Tenants: " . htmlspecialchars($room['NumofTen']) . "</p>";
         echo "<p>Room Status: " . htmlspecialchars($room['RoomStatus']) . "</p>";
-        
+        if ($_SESSION['staff_role'] == 'Admin' || $_SESSION['staff_role'] == 'admin']{
         echo "<td><button class='edit-btn' data-room-id='" . htmlspecialchars($room['RoomID']) . "'>Edit</button></td>";
         echo "<td><button class='delete-btn' data-room-id='" . htmlspecialchars($room['RoomID']) . "'>Delete</button></td><br><br>";
-        
+    }
         if ($tenantsResult && $tenantsResult->num_rows > 0) {
             while ($tenant = $tenantsResult->fetch_assoc()) {
                 echo "Tenant Name: ". htmlspecialchars($tenant['Fullname']) . "<br>";
